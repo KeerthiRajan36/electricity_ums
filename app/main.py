@@ -69,18 +69,9 @@ def on_startup():
     Base.metadata.create_all(bind=engine)
 
 
-# --- Health / root ---------------------------------------------------------
-@app.get("/", tags=["Health"])
-def root():
-    return {"service": settings.APP_NAME, "status": "running", "docs": "/docs"}
 
 
-@app.get("/health", tags=["Health"])
-def health():
-    return {"status": "ok"}
 
-
-# --- Routers (Level 17: API versioning bonus, all under /api/v1) --------
 for router in (
     auth.router, customers.router, connections.router, meters.router, readings.router,
     tariffs.router, bills.router, payments.router, complaints.router, technicians.router,
